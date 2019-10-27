@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/1bc310303d.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>theScientificWeatherApp</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="card bg-dark text-white">
+        <img
+          src="https://images.pexels.com/photos/2867883/pexels-photo-2867883.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+          class="card-img"
+        />
+        <div class="card-img-overlay">
+          <div class="row">
+            <div class="col-5" id="enterCity">
+              <input
+                type="search"
+                placeholder="Enter city"
+                id="searchEngine"
+                autocomplete="off"
+              />
+            </div>
+            <div class="col-2" id="submitIcon">
+              <input type="submit" value="🔍" id="searchGlass" />
+            </div>
+            <div class="col-2" class="icon" id="cityDefinitionsIcon">
+              <i class="fas fa-city"></i>
+            </div>
+            <div class="col-1" class="icon" id="localIcon">
+              <button id="currentLocation">
+                <i class="fas fa-map-marker-alt"></i>
+              </button>
+            </div>
+            <div class="col-2" class="units" id="unitsLinks">
+              <a href="#" id="celsius">C</a>|<a href="#" id="fahrenheit">F</a>
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-6" class="leftData">
+              <h4 class="leftData" id="location">Lisbon</h4>
+              <div class="leftData" id="dayHour">
+                sunday, 17:32
+              </div>
+              <div class="leftData" id="weatherDescription">
+                sunny
+              </div>
+              <div class="leftData" id="tempMaxMin">
+                28º/16º
+              </div>
+            </div>
+            <div class="col-6" id="currentWeather">
+              <img
+                src="https://www.accuweather.com/images/weathericons/1.svg"
+                class="weatherIcon"
+              />
+              <div id="currentTemperature">
+                <strong><span id="currentTemperatureNumber">26</span>º</strong>
+              </div>
+            </div>
+          </div>
+          <ul class="weatherDetails">
+            <li>
+              Wind
+            </li>
+            <li>
+              33 km/h
+            </li>
+            <li>
+              Humidity
+            </li>
+            <li>
+              57%
+            </li>
+            <li>
+              Precipitation
+            </li>
+            <li>
+              0%
+            </li>
+          </ul>
+          <footer class="forecast">
+            <div class="row justify-content-center">
+              <div class="col-2">
+                <small>Mon</small>
+                <img
+                  src="https://www.accuweather.com/images/weathericons/3.svg"
+                  class="forecastIcon"
+                />
+                <small>28º</small>
+              </div>
+              <div class="col-2">
+                <small>Tue</small>
+                <img
+                  src="https://www.accuweather.com/images/weathericons/3.svg"
+                  class="forecastIcon"
+                />
+                <small>28º</small>
+              </div>
+              <div class="col-2">
+                <small>Wed</small>
+                <img
+                  src="https://www.accuweather.com/images/weathericons/3.svg"
+                  class="forecastIcon"
+                />
+                <small>24º</small>
+              </div>
+              <div class="col-2">
+                <small>Thu</small>
+                <img
+                  src="https://www.accuweather.com/images/weathericons/3.svg"
+                  class="forecastIcon"
+                />
+                <small>26º</small>
+              </div>
+              <div class="col-2">
+                <small>Fri</small>
+                <img
+                  src="https://www.accuweather.com/images/weathericons/3.svg"
+                  class="forecastIcon"
+                />
+                <small>28º</small>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
