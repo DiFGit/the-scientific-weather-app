@@ -31,8 +31,8 @@ updateTime();
 
 function displayData(response) {
   let temperature = Math.round(response.data.main.temp);
-  let currentTemperatureNumber = document.querySelector(
-    "#currentTemperatureNumber"
+  let currentTemperatureElement = document.querySelector(
+    "#currentTemperatureElement"
   );
   let currentLocalWeatherDes = document.querySelector("#weatherDescription");
   let currentLocalTempMax = Math.round(response.data.main.temp_max);
@@ -43,13 +43,19 @@ function displayData(response) {
   //let currentLocalPressure = document.querySelector("#");
   let currentCity = document.querySelector("#location");
   currentCity.innerHTML = response.data.name;
-  currentTemperatureNumber.innerHTML = `${temperature}`;
+  currentTemperatureElement.innerHTML = `${temperature}`;
   currentLocalWeatherDes.innerHTML = response.data.weather[0].description;
   currentLocalTempAmplitude.innerHTML = `${currentLocalTempMax}º / ${currentLocalTempMin}º`;
   //currentLocalWind.innerHTML = response.data.wind.speed;
   //currentLocalHumidity.innerHTML = response.data.main.humidity;
   //currentLocalPressure.innerHTML = response.data.main.pressure;
 }
+function displayByDefault() {
+  let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Lisbon&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayData);
+}
+displayByDefault();
 
 function inputSearch(event) {
   event.preventDefault();
