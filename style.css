@@ -37,13 +37,15 @@ ul.weatherDetails {
   font-size: small;
   text-align: right;
   text-shadow: 1px 1px 1px black;
-}
-.weatherIcon {
   position: relative;
-  left: 5px;
-  bottom: 10px;
-  width: 90px;
-  height: 90px;
+  bottom: 25px;
+}
+#weatherIcon {
+  position: relative;
+  left: 35px;
+  bottom: 30px;
+  width: 140px;
+  height: 140px;
 }
 .forecast {
   text-shadow: 1px 1px 1px black;
@@ -57,7 +59,7 @@ ul.weatherDetails {
   padding: 0 4px 0;
   font-size: 40px;
   position: relative;
-  bottom: 15px;
+  bottom: 60px;
 }
 #localIcon {
   text-align: left;

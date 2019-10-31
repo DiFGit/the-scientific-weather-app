@@ -42,6 +42,8 @@ function displayData(response) {
   let currentLocalHumidity = document.querySelector("#humidity");
   let currentLocalPressure = document.querySelector("#pressure");
   let currentCity = document.querySelector("#location");
+  let currentWeatherIcon = document.querySelector("#weatherIcon");
+  let icon = response.data.weather[0].icon;
   currentCity.innerHTML = response.data.name;
   currentTemperatureElement.innerHTML = `${temperature}`;
   currentLocalWeatherDes.innerHTML = response.data.weather[0].description;
@@ -49,6 +51,10 @@ function displayData(response) {
   currentLocalWind.innerHTML = response.data.wind.speed;
   currentLocalHumidity.innerHTML = response.data.main.humidity;
   currentLocalPressure.innerHTML = response.data.main.pressure;
+  currentWeatherIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${icon}@2x.png`
+  );
 }
 function displayByDefault() {
   let windUnits = document.querySelector("#windUnits");
