@@ -73,6 +73,8 @@ function inputSearch(event) {
     city.innerHTML = input.value;
     let windUnits = document.querySelector("#windUnits");
     windUnits.innerHTML = `m/s`;
+    celsius.classList.add("active");
+    fahrenheit.classList.remove("active");
     let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(displayData);
@@ -85,6 +87,8 @@ function getLocalData(position) {
   let currentPosition = `lat=${position.coords.latitude}&lon=${position.coords.longitude}`;
   let windUnits = document.querySelector("#windUnits");
   windUnits.innerHTML = `m/s`;
+  celsius.classList.add("active");
+  fahrenheit.classList.remove("active");
   let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?${currentPosition}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayData);
