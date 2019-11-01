@@ -32,6 +32,17 @@ small {
 .leftData {
   text-shadow: 1px 1px 1px black;
 }
+div.units {
+  text-shadow: 1px 1px 1px black;
+}
+.active {
+  color: #ffffff;
+}
+.active:hover {
+  cursor: default;
+  text-decoration: none;
+  color: #ffffff;
+}
 ul.weatherDetails {
   list-style: none;
   font-size: small;

@@ -62,7 +62,6 @@ function displayByDefault() {
   let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Lisbon&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayData);
-  console.log(apiUrl);
 }
 displayByDefault();
 
@@ -95,10 +94,15 @@ function getCurrentLocation() {
   navigator.geolocation.getCurrentPosition(getLocalData);
 }
 
+let celsius = document.querySelector("#celsius");
+let fahrenheit = document.querySelector("#fahrenheit");
+
 function convertToCelsius() {
   let displayedCity = document.querySelector("#location");
   let windUnits = document.querySelector("#windUnits");
   windUnits.innerHTML = `m/s`;
+  celsius.classList.add("active");
+  fahrenheit.classList.remove("active");
   let apiCity = displayedCity.innerHTML;
   let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${apiCity}&appid=${apiKey}&units=metric`;
@@ -106,9 +110,12 @@ function convertToCelsius() {
 }
 
 function getImperialData(currentCity) {
+  event.preventDefault();
   let displayedCity = document.querySelector("#location");
   let windUnits = document.querySelector("#windUnits");
   windUnits.innerHTML = `mph`;
+  celsius.classList.remove("active");
+  fahrenheit.classList.add("active");
   let apiCity = displayedCity.innerHTML;
   let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${apiCity}&appid=${apiKey}&units=imperial`;
@@ -121,8 +128,6 @@ submit.addEventListener("click", inputSearch);
 let currentLocation = document.querySelector("#currentLocation");
 currentLocation.addEventListener("click", getCurrentLocation);
 
-let celsius = document.querySelector("#celsius");
 celsius.addEventListener("click", convertToCelsius);
 
-let fahrenheit = document.querySelector("#fahrenheit");
 fahrenheit.addEventListener("click", getImperialData);
