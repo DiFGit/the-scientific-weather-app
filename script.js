@@ -1,5 +1,6 @@
-function updateTime() {
-  let date = new Date();
+function updateTime(timestamp) {
+  let date = new Date(timestamp);
+  console.log(date);
   let hours = date.getHours();
   if (hours < 10) {
     hour = `0${hours}`;
@@ -27,7 +28,6 @@ function updateTime() {
   let dayHour = document.querySelector("#dayHour");
   dayHour.innerHTML = `${day}, ${hour}:${minute}`;
 }
-updateTime();
 
 function displayData(response) {
   let temperature = Math.round(response.data.main.temp);
@@ -55,7 +55,10 @@ function displayData(response) {
     "src",
     `http://openweathermap.org/img/wn/${icon}@2x.png`
   );
+  let localDate = response.data.dt * 1000 + response.data.timezone * 1000;
+  updateTime(localDate);
 }
+
 function displayByDefault() {
   let windUnits = document.querySelector("#windUnits");
   windUnits.innerHTML = `m/s`;
