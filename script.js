@@ -74,10 +74,11 @@ function displayForecast(response) {
 
   for (let index = 0; index < 40; index += 8) {
     forecast = response.data.list[index];
+    timezone = response.data.city.timezone * 1000;
     forecastElement.innerHTML += `
     <div class="col-2, date-0">
                 <small id="forecast-date-0">${formatHours(
-                  forecast.dt * 1000
+                  forecast.dt * 1000 + timezone
                 )}</small>
                 <img
                   src="http://openweathermap.org/img/wn/${
