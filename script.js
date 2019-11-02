@@ -19,7 +19,12 @@ function updateTime(timestamp) {
 
 function formatHours(timestamp) {
   let date = new Date(timestamp);
-
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let forecastDay = days[day + 1];
+  if (day == 6) {
+    forecastDay = days[0];
+  }
   let hours = date.getHours();
   if (hours < 10) {
     hours = `0${hours}`;
@@ -29,7 +34,7 @@ function formatHours(timestamp) {
     minutes = `0${minutes}`;
   }
 
-  return `${hours}:${minutes}`;
+  return `${forecastDay}, ${hours}:${minutes}`;
 }
 
 function displayData(response) {
@@ -67,7 +72,7 @@ function displayForecast(response) {
   forecastElement.innerHTML = null;
   forecast = null;
 
-  for (let index = 0; index < 6; index++) {
+  for (let index = 0; index < 40; index += 8) {
     forecast = response.data.list[index];
     forecastElement.innerHTML += `
     <div class="col-2, date-0">
