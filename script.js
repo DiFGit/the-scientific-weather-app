@@ -1,32 +1,35 @@
+let days = [
+  "sunday",
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday"
+];
+
 function updateTime(timestamp) {
   let date = new Date(timestamp);
-  console.log(date);
-  let hours = date.getHours();
-  if (hours < 10) {
-    hour = `0${hours}`;
-  } else {
-    hour = hours;
-  }
-  let minutes = date.getMinutes();
-  if (minutes < 10) {
-    minute = `0${minutes}`;
-  } else {
-    minute = minutes;
-  }
 
-  let days = [
-    "sunday",
-    "monday",
-    "tuesday",
-    "wednesday",
-    "thursday",
-    "friday",
-    "saturday"
-  ];
   let day = days[date.getDay()];
 
   let dayHour = document.querySelector("#dayHour");
-  dayHour.innerHTML = `${day}, ${hour}:${minute}`;
+  dayHour.innerHTML = `${day}, ${formatHours(timestamp)}`;
+}
+
+function formatHours(timestamp) {
+  let date = new Date(timestamp);
+
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
+  return `${hours}:${minutes}`;
 }
 
 function displayData(response) {
@@ -59,12 +62,40 @@ function displayData(response) {
   updateTime(localDate);
 }
 
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = null;
+  forecast = null;
+
+  for (let index = 0; index < 6; index++) {
+    forecast = response.data.list[index];
+    forecastElement.innerHTML += `
+    <div class="col-2, date-0">
+                <small id="forecast-date-0">${formatHours(
+                  forecast.dt * 1000
+                )}</small>
+                <img
+                  src="http://openweathermap.org/img/wn/${
+                    forecast.weather[0].icon
+                  }@2x.png";
+                  class="forecastIcon"
+                  id="forecast-icon-0"
+                />
+                <small id="forecast-main-temp-0">${Math.round(
+                  forecast.main.temp
+                )}</small>
+              </div>`;
+  }
+}
+
 function displayByDefault() {
   let windUnits = document.querySelector("#windUnits");
   windUnits.innerHTML = `m/s`;
   let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Lisbon&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayData);
+  let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=Lisbon&appid=${apiKey}&units=metric`;
+  axios.get(apiForecastUrl).then(displayForecast);
 }
 displayByDefault();
 
@@ -81,6 +112,8 @@ function inputSearch(event) {
     let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(displayData);
+    let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${input.value}&appid=${apiKey}&units=metric`;
+    axios.get(apiForecastUrl).then(displayForecast);
   } else {
     window.location.reload(false);
   }
@@ -95,6 +128,8 @@ function getLocalData(position) {
   let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?${currentPosition}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayData);
+  let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${currentPosition}&appid=${apiKey}&units=metric`;
+  axios.get(apiForecastUrl).then(displayForecast);
 }
 
 function getCurrentLocation() {
@@ -114,6 +149,8 @@ function convertToCelsius() {
   let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${apiCity}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayData);
+  let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${apiCity}&appid=${apiKey}&units=metric`;
+  axios.get(apiForecastUrl).then(displayForecast);
 }
 
 function getImperialData(currentCity) {
@@ -127,6 +164,8 @@ function getImperialData(currentCity) {
   let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${apiCity}&appid=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(displayData);
+  let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${apiCity}&appid=${apiKey}&units=imperial`;
+  axios.get(apiForecastUrl).then(displayForecast);
 }
 
 let submit = document.querySelector("#searchGlass");
@@ -136,5 +175,4 @@ let currentLocation = document.querySelector("#currentLocation");
 currentLocation.addEventListener("click", getCurrentLocation);
 
 celsius.addEventListener("click", convertToCelsius);
-
 fahrenheit.addEventListener("click", getImperialData);
