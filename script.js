@@ -72,6 +72,7 @@ function displayData(response) {
   );
   let localDate = response.data.dt * 1000 + response.data.timezone * 1000;
   updateTime(localDate);
+  getCityImage(response.data.name);
 }
 
 function displayForecast(response) {
@@ -189,3 +190,15 @@ currentLocation.addEventListener("click", getCurrentLocation);
 
 celsius.addEventListener("click", convertToCelsius);
 fahrenheit.addEventListener("click", getImperialData);
+
+function getCityImage(city) {
+  axios({
+    method: "get",
+    url: `http://api.pexels.com/v1/search?query=${city}+query&per_page=15&page=1`,
+    headers: {
+      Authorization: "563492ad6f91700001000001ea246cab4f4645409f66c0be39fbe2b1"
+    }
+  }).then(function(response) {
+    console.log(response);
+  });
+}
