@@ -195,6 +195,9 @@ function getCityImage(city) {
 function displayCityImage(response) {
   let background = document.querySelector("#background-image");
   let imageUrl = response.data.photos[3].src.portrait;
+  if (imageUrl.protocol == "http:") {
+    location.href = location.href.replace(`http:`, `https:`);
+  }
   background.setAttribute("src", imageUrl);
 }
 
