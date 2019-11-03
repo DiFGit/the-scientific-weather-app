@@ -1,16 +1,14 @@
-let days = [
-  "sunday",
-  "monday",
-  "tuesday",
-  "wednesday",
-  "thursday",
-  "friday",
-  "saturday"
-];
-
 function updateTime(timestamp) {
   let date = new Date(timestamp);
-
+  let days = [
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday"
+  ];
   let day = days[date.getDay()];
   let hours = date.getHours();
   if (hours < 10) {
@@ -20,7 +18,7 @@ function updateTime(timestamp) {
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
-  let dayHour = document.querySelector("#dayHour");
+  let dayHour = document.querySelector("#day-hour");
   dayHour.innerHTML = `${day}, ${hours}:${minutes}`;
 }
 
@@ -47,18 +45,19 @@ function formatHours(timestamp) {
 function displayData(response) {
   let temperature = Math.round(response.data.main.temp);
   let currentTemperatureElement = document.querySelector(
-    "#currentTemperatureElement"
+    "#current-temperature-element"
   );
-  let currentLocalWeatherDes = document.querySelector("#weatherDescription");
+  let currentLocalWeatherDes = document.querySelector("#weather-description");
   let currentLocalTempMax = Math.round(response.data.main.temp_max);
   let currentLocalTempMin = Math.round(response.data.main.temp_min);
-  let currentLocalTempAmplitude = document.querySelector("#tempMaxMin");
-  let currentLocalWind = document.querySelector("#windSpeed");
+  let currentLocalTempAmplitude = document.querySelector("#temp-max-min");
+  let currentLocalWind = document.querySelector("#wind-speed");
   let currentLocalHumidity = document.querySelector("#humidity");
   let currentLocalPressure = document.querySelector("#pressure");
   let currentCity = document.querySelector("#location");
-  let currentWeatherIcon = document.querySelector("#weatherIcon");
+  let currentWeatherIcon = document.querySelector("#weather-icon");
   let icon = response.data.weather[0].icon;
+  let localDate = response.data.dt * 1000 + response.data.timezone * 1000;
   currentCity.innerHTML = response.data.name;
   currentTemperatureElement.innerHTML = `${temperature}`;
   currentLocalWeatherDes.innerHTML = response.data.weather[0].description;
@@ -70,7 +69,6 @@ function displayData(response) {
     "src",
     `http://openweathermap.org/img/wn/${icon}@2x.png`
   );
-  let localDate = response.data.dt * 1000 + response.data.timezone * 1000;
   updateTime(localDate);
   getCityImage(response.data.name);
 }
@@ -79,31 +77,26 @@ function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTML = null;
   forecast = null;
-
   for (let index = 0; index < 40; index += 8) {
     forecast = response.data.list[index];
     timezone = response.data.city.timezone * 1000;
     forecastElement.innerHTML += `
     <div class="col-2, date-0">
-                <small id="forecast-date-0">${formatHours(
-                  forecast.dt * 1000 + timezone
-                )}</small>
-                <img
-                  src="http://openweathermap.org/img/wn/${
-                    forecast.weather[0].icon
-                  }@2x.png";
-                  class="forecastIcon"
-                  id="forecast-icon-0"
-                />
-                <small id="forecast-main-temp-0">${Math.round(
-                  forecast.main.temp
-                )}</small>
-              </div>`;
+      <small id="forecast-date-0">${formatHours(
+        forecast.dt * 1000 + timezone
+      )}</small>
+      <img src="http://openweathermap.org/img/wn/${
+        forecast.weather[0].icon
+      }@2x.png"; class="forecastIcon" id="forecast-icon-0"/>
+      <small id="forecast-main-temp-0">${Math.round(
+        forecast.main.temp
+      )}º</small>
+    </div>`;
   }
 }
 
 function displayByDefault() {
-  let windUnits = document.querySelector("#windUnits");
+  let windUnits = document.querySelector("#wind-units");
   windUnits.innerHTML = `m/s`;
   let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Lisbon&appid=${apiKey}&units=metric`;
@@ -111,18 +104,19 @@ function displayByDefault() {
   let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=Lisbon&appid=${apiKey}&units=metric`;
   axios.get(apiForecastUrl).then(displayForecast);
 }
-displayByDefault();
 
 function inputSearch(event) {
   event.preventDefault();
-  let input = document.querySelector("#searchEngine");
+  let input = document.querySelector("#search-engine");
   if (input.value) {
     let city = document.querySelector("#location");
     city.innerHTML = input.value;
-    let windUnits = document.querySelector("#windUnits");
+    let windUnits = document.querySelector("#wind-units");
     windUnits.innerHTML = `m/s`;
     celsius.classList.add("active");
+    celsius.classList.remove("inactive");
     fahrenheit.classList.remove("active");
+    fahrenheit.classList.add("inactive");
     let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(displayData);
@@ -135,10 +129,12 @@ function inputSearch(event) {
 
 function getLocalData(position) {
   let currentPosition = `lat=${position.coords.latitude}&lon=${position.coords.longitude}`;
-  let windUnits = document.querySelector("#windUnits");
+  let windUnits = document.querySelector("#wind-units");
   windUnits.innerHTML = `m/s`;
   celsius.classList.add("active");
+  celsius.classList.remove("inactive");
   fahrenheit.classList.remove("active");
+  fahrenheit.classList.add("inactive");
   let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?${currentPosition}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayData);
@@ -155,10 +151,12 @@ let fahrenheit = document.querySelector("#fahrenheit");
 
 function convertToCelsius() {
   let displayedCity = document.querySelector("#location");
-  let windUnits = document.querySelector("#windUnits");
+  let windUnits = document.querySelector("#wind-units");
   windUnits.innerHTML = `m/s`;
   celsius.classList.add("active");
+  celsius.classList.remove("inactive");
   fahrenheit.classList.remove("active");
+  fahrenheit.classList.add("inactive");
   let apiCity = displayedCity.innerHTML;
   let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${apiCity}&appid=${apiKey}&units=metric`;
@@ -170,10 +168,12 @@ function convertToCelsius() {
 function getImperialData(currentCity) {
   event.preventDefault();
   let displayedCity = document.querySelector("#location");
-  let windUnits = document.querySelector("#windUnits");
+  let windUnits = document.querySelector("#wind-units");
   windUnits.innerHTML = `mph`;
   celsius.classList.remove("active");
+  celsius.classList.add("inactive");
   fahrenheit.classList.add("active");
+  fahrenheit.classList.remove("inactive");
   let apiCity = displayedCity.innerHTML;
   let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${apiCity}&appid=${apiKey}&units=imperial`;
@@ -181,15 +181,6 @@ function getImperialData(currentCity) {
   let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${apiCity}&appid=${apiKey}&units=imperial`;
   axios.get(apiForecastUrl).then(displayForecast);
 }
-
-let submit = document.querySelector("#searchGlass");
-submit.addEventListener("click", inputSearch);
-
-let currentLocation = document.querySelector("#currentLocation");
-currentLocation.addEventListener("click", getCurrentLocation);
-
-celsius.addEventListener("click", convertToCelsius);
-fahrenheit.addEventListener("click", getImperialData);
 
 function getCityImage(city) {
   axios({
@@ -203,6 +194,17 @@ function getCityImage(city) {
 
 function displayCityImage(response) {
   let background = document.querySelector("#background-image");
-  let imageUrl = response.data.photos[0].src.portrait;
+  let imageUrl = response.data.photos[3].src.portrait;
   background.setAttribute("src", imageUrl);
 }
+
+let submit = document.querySelector("#search-glass");
+submit.addEventListener("click", inputSearch);
+
+let currentLocation = document.querySelector("#current-location");
+currentLocation.addEventListener("click", getCurrentLocation);
+
+celsius.addEventListener("click", convertToCelsius);
+fahrenheit.addEventListener("click", getImperialData);
+
+displayByDefault();

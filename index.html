@@ -21,66 +21,57 @@
   <body>
     <div class="container">
       <div class="card bg-dark text-white">
-        <img
-          src="https://images.pexels.com/photos/2867883/pexels-photo-2867883.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-          class="card-img"
-          id="background-image"
-        />
+        <img src="#" class="card-img" id="background-image" />
         <div class="card-img-overlay">
           <div class="row">
-            <div class="col-5" id="enterCity">
-              <input
-                type="search"
-                placeholder="Enter city"
-                id="searchEngine"
-                autocomplete="off"
-              />
+            <div class="col-5">
+              <form class="mb-0">
+                <input
+                  type="search"
+                  placeholder="Enter city"
+                  id="search-engine"
+                  autocomplete="off"
+                />
+              </form>
             </div>
-            <div class="col-2" id="submitIcon">
-              <input type="submit" value="🔍" id="searchGlass" />
+            <div class="col-2">
+              <form class="mb-0">
+                <input type="submit" value="🔍" id="search-glass" />
+              </form>
             </div>
-            <div class="col-2" class="icon" id="cityDefinitionsIcon">
-              <i class="fas fa-city"></i>
-            </div>
-            <div class="col-1" class="icon" id="localIcon">
-              <button id="currentLocation">
-                <i class="fas fa-map-marker-alt"></i>
+
+            <div class="col-2" class="icon" id="submit-icon">
+              <button id="current-location">
+                <i class="fas fa-map-marker-alt" id="local-icon"></i>
               </button>
             </div>
-            <div class="col-2 units" id="unitsLinks">
+            <div class="col-3 units" id="units-links">
               <a href="#" id="celsius" class="active">C </a>
               |
-              <a href="#" id="fahrenheit">F </a>
+              <a href="#" id="fahrenheit" class="inactive">F </a>
             </div>
           </div>
           <br />
           <div class="row">
             <div class="col-6" class="leftData">
               <h4 class="leftData" id="location"></h4>
-              <div class="leftData" id="dayHour"></div>
-              <div class="leftData" id="weatherDescription"></div>
-              <div class="leftData" id="tempMaxMin"></div>
+              <div class="leftData" id="day-hour"></div>
+              <div class="leftData" id="weather-description"></div>
+              <div class="leftData" id="temp-max-min"></div>
             </div>
-            <div class="col-6" id="currentWeather">
-              <img src="#" id="weatherIcon" />
-              <div id="currentTemperature">
-                <strong><span id="currentTemperatureElement"></span>º</strong>
+            <div class="col-6" id="current-weather">
+              <img src="#" id="weather-icon" />
+              <div id="current-temperature">
+                <strong><span id="current-temperature-element"></span>º</strong>
               </div>
             </div>
           </div>
           <ul class="weatherDetails">
             <li>
-              Wind
+              Wind: <span id="wind-speed"></span><span id="wind-units"></span>
             </li>
-            <li><span id="windSpeed"></span><span id="windUnits"></span></li>
-            <li>
-              Humidity
-            </li>
-            <li><span id="humidity"></span>%</li>
-            <li>
-              Pressure
-            </li>
-            <li><span id="pressure"></span>mb</li>
+            <li>Humidity: <span id="humidity"></span>%</li>
+            <li>Pressure: <span id="pressure"></span>mb</li>
           </ul>
           <footer>
             <div class="row justify-content-center" id="forecast"></div>
@@ -88,8 +79,14 @@
         </div>
       </div>
     </div>
+    <small id="pexels-link"
+      >Photos provided by
+      <a href="https://www.pexels.com/" target="_blank">Pexels</a></small
+    >
     <small id="github-link"
-      ><a href="https://github.com/DiFGit/the-scientific-weather-app"
+      ><a
+        href="https://github.com/DiFGit/the-scientific-weather-app"
+        target="_blank"
         >Open-source code</a
       >, by DiFGit</small
     >

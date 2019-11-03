@@ -1,13 +1,16 @@
 body {
   font-family: sans-serif;
 }
+
 div.container {
   max-width: 500px;
   max-height: 500px;
 }
+
 img {
-  height: 545px;
+  height: 500px;
 }
+
 i {
   color: #ffffff;
   font-size: 16px;
@@ -16,33 +19,22 @@ i {
   position: relative;
   top: 4px;
 }
+
 footer {
-  background: rgba(17, 16, 16, 0.7);
+  background: rgba(192, 192, 192, 0.7);
   border-radius: 20px;
   position: relative;
   top: 80px;
 }
+
 small {
   display: block;
 }
 
-.card bg-dark text-white {
-  max-width: 300px;
-}
-.leftData {
-  text-shadow: 1px 1px 1px black;
-}
 div.units {
   text-shadow: 1px 1px 1px black;
 }
-.active {
-  color: #ffffff;
-}
-.active:hover {
-  cursor: default;
-  text-decoration: none;
-  color: #ffffff;
-}
+
 ul.weatherDetails {
   list-style: none;
   font-size: small;
@@ -51,55 +43,119 @@ ul.weatherDetails {
   position: relative;
   bottom: 25px;
 }
-#weatherIcon {
-  position: relative;
-  left: 35px;
-  bottom: 30px;
-  width: 140px;
-  height: 140px;
-}
-.forecast {
-  text-shadow: 1px 1px 1px black;
-  text-align: center;
-}
-#currentWeather {
-  text-align: right;
-}
-#currentTemperature {
-  text-shadow: 1px 1px 1px black;
-  padding: 0 4px 0;
-  font-size: 40px;
-  position: relative;
-  bottom: 60px;
-}
-#localIcon {
-  text-align: left;
-  position: relative;
-  right: 20px;
+
+.card bg-dark text-white {
+  max-width: 300px;
 }
 
-#cityDefinitionsIcon {
-  text-align: center;
+.leftData {
+  text-shadow: 1px 1px 1px black;
+}
+
+.leftData:first-letter {
+  text-transform: capitalize;
+}
+
+.active {
+  color: #ffffff;
+}
+
+.active:hover {
+  cursor: default;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.inactive {
+  color: #ec6e4c;
+}
+
+.inactive:hover {
+  color: #ec6e4c;
 }
 
 .forecastIcon {
   height: 27px;
   width: 27px;
 }
-#searchEngine {
-  border-radius: 4px;
+
+.forecast {
+  text-shadow: 1px 1px 1px black;
+  text-align: center;
 }
-#searchGlass {
+
+#weather-icon {
   position: relative;
+  left: 35px;
+  bottom: 30px;
+  width: 140px;
+  height: 140px;
 }
-#currentLocation {
+
+#current-weather {
+  text-align: right;
+}
+
+#current-temperature {
+  text-shadow: 1px 1px 1px black;
+  padding: 0 4px 0;
+  font-size: 40px;
+  position: relative;
+  bottom: 60px;
+}
+
+#submit-icon {
+  position: relative;
+  right: 20px;
+}
+
+#local-icon {
+  text-align: left;
+  font-size: x-large;
+  color: #ec6e4c;
+}
+
+#search-engine {
+  border-radius: 4px;
+  width: 175px;
+}
+
+#search-glass {
+  position: relative;
+  top: 1px;
+  border-width: 2px;
+  border-radius: 4px;
+  border-style: outset;
+  border-color: initial;
+  border-image: initial;
+}
+
+#current-location {
   border-radius: 50%;
+  position: relative;
+  bottom: 4px;
   border-color: rgb(250, 250, 250, 0);
   background: rgb(250, 250, 250, 0);
 }
+
+#units-links {
+  font-size: x-large;
+}
+
 #github-link {
   text-align: center;
   position: relative;
-  top: 50px;
   right: 150px;
+  bottom: 18.5px;
+}
+
+#pexels-link {
+  text-align: center;
+  position: relative;
+  left: 155px;
+}
+
+#pexels-link a {
+  color: black;
+  text-decoration-line: underline;
 }
