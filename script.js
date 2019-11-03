@@ -71,7 +71,6 @@ function displayData(response) {
   );
   updateTime(localDate);
   getCityImage(response.data.name);
-  getCityImage(response.data.name);
 }
 
 function displayForecast(response) {
@@ -181,18 +180,6 @@ function getImperialData(currentCity) {
   axios.get(apiUrl).then(displayData);
   let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${apiCity}&appid=${apiKey}&units=imperial`;
   axios.get(apiForecastUrl).then(displayForecast);
-}
-
-function getCityImage(city) {
-  axios({
-    method: "get",
-    url: `http://api.pexels.com/v1/search?query=${city}+query&per_page=15&page=1`,
-    headers: {
-      Authorization: "563492ad6f91700001000001ea246cab4f4645409f66c0be39fbe2b1"
-    }
-  }).then(function(response) {
-    console.log(response);
-  });
 }
 
 function getCityImage(city) {
