@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  text-shadow: 1px 1px 1px black;
 }
 
 div.container {
@@ -8,14 +9,13 @@ div.container {
 }
 
 img {
-  height: 500px;
+  height: 485px;
 }
 
 i {
   color: #ffffff;
   font-size: 16px;
   line-height: 25px;
-  text-shadow: 1px 1px 1px black;
   position: relative;
   top: 4px;
 }
@@ -30,25 +30,12 @@ small {
   display: block;
 }
 
-div.units {
-  text-shadow: 1px 1px 1px black;
-}
-
 ul.weatherDetails {
   list-style: none;
   font-size: small;
   text-align: right;
-  text-shadow: 1px 1px 1px black;
   position: relative;
   bottom: 25px;
-}
-
-.card bg-dark text-white {
-  max-width: 300px;
-}
-
-.leftData {
-  text-shadow: 1px 1px 1px black;
 }
 
 .leftData:first-letter {
@@ -86,7 +73,6 @@ ul.weatherDetails {
 }
 
 #current-temperature {
-  text-shadow: 1px 1px 1px black;
   padding: 0 4px 0;
   font-size: 40px;
   position: relative;
@@ -136,12 +122,14 @@ ul.weatherDetails {
   position: relative;
   right: 150px;
   bottom: 18.5px;
+  text-shadow: none;
 }
 
 #pexels-link {
   text-align: center;
   position: relative;
   left: 155px;
+  text-shadow: none;
 }
 
 #pexels-link a {
@@ -155,10 +143,5 @@ ul.weatherDetails {
 }
 
 #forecast {
-  text-shadow: 1px 1px 1px black;
   text-align: center;
-}
-
-#forecast-description {
-  text-shadow: 1px 1px 1px black;
 }
