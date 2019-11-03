@@ -63,7 +63,7 @@ ul.weatherDetails {
 #weather-icon {
   position: relative;
   left: 35px;
-  bottom: 30px;
+  bottom: 35px;
   width: 140px;
   height: 140px;
 }
@@ -76,7 +76,7 @@ ul.weatherDetails {
   padding: 0 4px 0;
   font-size: 40px;
   position: relative;
-  bottom: 60px;
+  bottom: 75px;
 }
 
 #submit-icon {
