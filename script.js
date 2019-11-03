@@ -171,16 +171,6 @@ function getImperialData(currentCity) {
   axios.get(apiForecastUrl).then(displayForecast);
 }
 
-function getCityImage(city) {
-  axios({
-    method: "get",
-    url: `https://api.pexels.com/v1/search?query=${city}+query&per_page=15&page=1`,
-    headers: {
-      Authorization: "563492ad6f91700001000001ea246cab4f4645409f66c0be39fbe2b1"
-    }
-  }).then(displayCityImage);
-}
-
 function displayCityImage(response) {
   let background = document.querySelector("#background-image");
   let imageUrl = response.data.photos[3].src.portrait;
@@ -188,6 +178,25 @@ function displayCityImage(response) {
     location.href = location.href.replace(`http:`, `https:`);
   }
   background.setAttribute("src", imageUrl);
+}
+
+function displayUndefinedImage(error) {
+  let background = document.querySelector("#background-image");
+  let undefinedImage =
+    "https://images.pexels.com/photos/1078850/pexels-photo-1078850.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
+  background.setAttribute("src", undefinedImage);
+}
+
+function getCityImage(city) {
+  axios({
+    method: "get",
+    url: `https://api.pexels.com/v1/search?query=${city}+query&per_page=15&page=1`,
+    headers: {
+      Authorization: "563492ad6f91700001000001ea246cab4f4645409f66c0be39fbe2b1"
+    }
+  })
+    .then(displayCityImage)
+    .catch(displayUndefinedImage);
 }
 
 let submit = document.querySelector("#search-glass");
