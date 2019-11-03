@@ -22,9 +22,8 @@ i {
 
 footer {
   background: rgba(192, 192, 192, 0.7);
-  border-radius: 20px;
+  border-radius: 10px;
   position: relative;
-  top: 80px;
 }
 
 small {
@@ -72,16 +71,6 @@ ul.weatherDetails {
 
 .inactive:hover {
   color: #ec6e4c;
-}
-
-.forecastIcon {
-  height: 27px;
-  width: 27px;
-}
-
-.forecast {
-  text-shadow: 1px 1px 1px black;
-  text-align: center;
 }
 
 #weather-icon {
@@ -158,4 +147,18 @@ ul.weatherDetails {
 #pexels-link a {
   color: black;
   text-decoration-line: underline;
+}
+
+#forecast-icon {
+  height: 36px;
+  width: 36px;
+}
+
+#forecast {
+  text-shadow: 1px 1px 1px black;
+  text-align: center;
+}
+
+#forecast-description {
+  text-shadow: 1px 1px 1px black;
 }

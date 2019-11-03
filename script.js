@@ -30,16 +30,7 @@ function formatHours(timestamp) {
   if (day == 6) {
     forecastDay = days[0];
   }
-  let hours = date.getHours();
-  if (hours < 10) {
-    hours = `0${hours}`;
-  }
-  let minutes = date.getMinutes();
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
-
-  return `${forecastDay}, ${hours}:${minutes}`;
+  return `${forecastDay}`;
 }
 
 function displayData(response) {
@@ -81,16 +72,14 @@ function displayForecast(response) {
     forecast = response.data.list[index];
     timezone = response.data.city.timezone * 1000;
     forecastElement.innerHTML += `
-    <div class="col-2, date-0">
-      <small id="forecast-date-0">${formatHours(
+    <div class="col col-lg-2">
+      <div id="forecast-date">${formatHours(
         forecast.dt * 1000 + timezone
-      )}</small>
+      )}</div>
       <img src="http://openweathermap.org/img/wn/${
         forecast.weather[0].icon
-      }@2x.png"; class="forecastIcon" id="forecast-icon-0"/>
-      <small id="forecast-main-temp-0">${Math.round(
-        forecast.main.temp
-      )}º</small>
+      }@2x.png"; class="forecastIcon" id="forecast-icon"/>
+      <div id="forecast-main-temp">${Math.round(forecast.main.temp)}º</dvi>
     </div>`;
   }
 }
