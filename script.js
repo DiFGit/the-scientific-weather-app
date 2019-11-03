@@ -198,7 +198,11 @@ function getCityImage(city) {
     headers: {
       Authorization: "563492ad6f91700001000001ea246cab4f4645409f66c0be39fbe2b1"
     }
-  }).then(function(response) {
-    console.log(response);
-  });
+  }).then(displayCityImage);
+}
+
+function displayCityImage(response) {
+  let background = document.querySelector("#background-image");
+  let imageUrl = response.data.photos[0].src.portrait;
+  background.setAttribute("src", imageUrl);
 }
