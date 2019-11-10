@@ -199,8 +199,8 @@ function getCityImage(city) {
     .catch(displayUndefinedImage);
 }
 
-let submit = document.querySelector("#search-glass");
-submit.addEventListener("click", inputSearch);
+let submit = document.querySelector("#search-form");
+submit.addEventListener("submit", inputSearch);
 
 let currentLocation = document.querySelector("#current-location");
 currentLocation.addEventListener("click", getCurrentLocation);
