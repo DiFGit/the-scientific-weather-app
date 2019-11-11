@@ -39,7 +39,7 @@ function displayData(response) {
   let currentLocalTempMin = Math.round(response.data.main.temp_min);
   let icon = response.data.weather[0].icon;
   let localDate = response.data.dt * 1000 + response.data.timezone * 1000;
-  currentCity.innerHTML = response.data.name;
+  city.innerHTML = response.data.name;
   currentTemperatureElement.innerHTML = `${temperature}`;
   currentLocalWeatherDes.innerHTML = response.data.weather[0].description;
   currentLocalTempAmplitude.innerHTML = `${currentLocalTempMax}º / ${currentLocalTempMin}º`;
@@ -86,7 +86,6 @@ function inputSearch(event) {
   event.preventDefault();
   let input = document.querySelector("#search-engine");
   if (input.value) {
-    let city = document.querySelector("#location");
     city.innerHTML = input.value;
     windUnits.innerHTML = `m/s`;
     celsius.classList.add("active");
@@ -120,28 +119,26 @@ function getCurrentLocation() {
 }
 
 function convertToCelsius() {
-  let displayedCity = document.querySelector("#location");
   windUnits.innerHTML = `m/s`;
   celsius.classList.add("active");
   celsius.classList.remove("inactive");
   fahrenheit.classList.remove("active");
   fahrenheit.classList.add("inactive");
-  let apiCity = displayedCity.innerHTML;
+  let apiCity = city.innerHTML;
   let weatherApiUrl = `${apiUrl}weather?q=${apiCity}&appid=${apiKey}&units=metric`;
   axios.get(weatherApiUrl).then(displayData);
   let apiForecastUrl = `${apiUrl}forecast?q=${apiCity}&appid=${apiKey}&units=metric`;
   axios.get(apiForecastUrl).then(displayForecast);
 }
 
-function getImperialData(currentCity) {
+function getImperialData() {
   event.preventDefault();
-  let displayedCity = document.querySelector("#location");
   windUnits.innerHTML = `mph`;
   celsius.classList.remove("active");
   celsius.classList.add("inactive");
   fahrenheit.classList.add("active");
   fahrenheit.classList.remove("inactive");
-  let apiCity = displayedCity.innerHTML;
+  let apiCity = city.innerHTML;
   let weatherApiUrl = `${apiUrl}weather?q=${apiCity}&appid=${apiKey}&units=imperial`;
   axios.get(weatherApiUrl).then(displayData);
   let apiForecastUrl = `${apiUrl}forecast?q=${apiCity}&appid=${apiKey}&units=imperial`;
@@ -176,6 +173,7 @@ function getCityImage(city) {
     .catch(displayUndefinedImage);
 }
 
+let city = document.querySelector("#location");
 let windUnits = document.querySelector("#wind-units");
 let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
 let apiUrl = `https://api.openweathermap.org/data/2.5/`;
@@ -191,7 +189,6 @@ let currentLocalTempAmplitude = document.querySelector("#temp-max-min");
 let currentLocalWind = document.querySelector("#wind-speed");
 let currentLocalHumidity = document.querySelector("#humidity");
 let currentLocalPressure = document.querySelector("#pressure");
-let currentCity = document.querySelector("#location");
 let currentWeatherIcon = document.querySelector("#weather-icon");
 
 displayByDefault();
