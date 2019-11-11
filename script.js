@@ -22,7 +22,7 @@ function updateTime(timestamp) {
   dayHour.innerHTML = `${day}, ${hours}:${minutes}`;
 }
 
-function formatHours(timestamp) {
+function formatForecastDay(timestamp) {
   let date = new Date(timestamp);
   let day = date.getDay();
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -35,18 +35,8 @@ function formatHours(timestamp) {
 
 function displayData(response) {
   let temperature = Math.round(response.data.main.temp);
-  let currentTemperatureElement = document.querySelector(
-    "#current-temperature-element"
-  );
-  let currentLocalWeatherDes = document.querySelector("#weather-description");
   let currentLocalTempMax = Math.round(response.data.main.temp_max);
   let currentLocalTempMin = Math.round(response.data.main.temp_min);
-  let currentLocalTempAmplitude = document.querySelector("#temp-max-min");
-  let currentLocalWind = document.querySelector("#wind-speed");
-  let currentLocalHumidity = document.querySelector("#humidity");
-  let currentLocalPressure = document.querySelector("#pressure");
-  let currentCity = document.querySelector("#location");
-  let currentWeatherIcon = document.querySelector("#weather-icon");
   let icon = response.data.weather[0].icon;
   let localDate = response.data.dt * 1000 + response.data.timezone * 1000;
   currentCity.innerHTML = response.data.name;
@@ -73,7 +63,7 @@ function displayForecast(response) {
     timezone = response.data.city.timezone * 1000;
     forecastElement.innerHTML += `
     <div class="col col-lg-2">
-      <div id="forecast-date">${formatHours(
+      <div id="forecast-date">${formatForecastDay(
         forecast.dt * 1000 + timezone
       )}</div>
       <img src="http://openweathermap.org/img/wn/${
@@ -85,12 +75,10 @@ function displayForecast(response) {
 }
 
 function displayByDefault() {
-  let windUnits = document.querySelector("#wind-units");
   windUnits.innerHTML = `m/s`;
-  let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Lisbon&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayData);
-  let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=Lisbon&appid=${apiKey}&units=metric`;
+  let weatherApiUrl = `${apiUrl}weather?q=Lisbon&appid=${apiKey}&units=metric`;
+  axios.get(weatherApiUrl).then(displayData);
+  let apiForecastUrl = `${apiUrl}forecast?q=Lisbon&appid=${apiKey}&units=metric`;
   axios.get(apiForecastUrl).then(displayForecast);
 }
 
@@ -100,16 +88,14 @@ function inputSearch(event) {
   if (input.value) {
     let city = document.querySelector("#location");
     city.innerHTML = input.value;
-    let windUnits = document.querySelector("#wind-units");
     windUnits.innerHTML = `m/s`;
     celsius.classList.add("active");
     celsius.classList.remove("inactive");
     fahrenheit.classList.remove("active");
     fahrenheit.classList.add("inactive");
-    let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(displayData);
-    let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${input.value}&appid=${apiKey}&units=metric`;
+    let weatherApiUrl = `${apiUrl}weather?q=${input.value}&appid=${apiKey}&units=metric`;
+    axios.get(weatherApiUrl).then(displayData);
+    let apiForecastUrl = `${apiUrl}forecast?q=${input.value}&appid=${apiKey}&units=metric`;
     axios.get(apiForecastUrl).then(displayForecast);
   } else {
     window.location.reload(false);
@@ -118,16 +104,14 @@ function inputSearch(event) {
 
 function getLocalData(position) {
   let currentPosition = `lat=${position.coords.latitude}&lon=${position.coords.longitude}`;
-  let windUnits = document.querySelector("#wind-units");
   windUnits.innerHTML = `m/s`;
   celsius.classList.add("active");
   celsius.classList.remove("inactive");
   fahrenheit.classList.remove("active");
   fahrenheit.classList.add("inactive");
-  let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?${currentPosition}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayData);
-  let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${currentPosition}&appid=${apiKey}&units=metric`;
+  let weatherApiUrl = `${apiUrl}weather?${currentPosition}&appid=${apiKey}&units=metric`;
+  axios.get(weatherApiUrl).then(displayData);
+  let apiForecastUrl = `${apiUrl}forecast?${currentPosition}&appid=${apiKey}&units=metric`;
   axios.get(apiForecastUrl).then(displayForecast);
 }
 
@@ -135,39 +119,32 @@ function getCurrentLocation() {
   navigator.geolocation.getCurrentPosition(getLocalData);
 }
 
-let celsius = document.querySelector("#celsius");
-let fahrenheit = document.querySelector("#fahrenheit");
-
 function convertToCelsius() {
   let displayedCity = document.querySelector("#location");
-  let windUnits = document.querySelector("#wind-units");
   windUnits.innerHTML = `m/s`;
   celsius.classList.add("active");
   celsius.classList.remove("inactive");
   fahrenheit.classList.remove("active");
   fahrenheit.classList.add("inactive");
   let apiCity = displayedCity.innerHTML;
-  let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${apiCity}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayData);
-  let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${apiCity}&appid=${apiKey}&units=metric`;
+  let weatherApiUrl = `${apiUrl}weather?q=${apiCity}&appid=${apiKey}&units=metric`;
+  axios.get(weatherApiUrl).then(displayData);
+  let apiForecastUrl = `${apiUrl}forecast?q=${apiCity}&appid=${apiKey}&units=metric`;
   axios.get(apiForecastUrl).then(displayForecast);
 }
 
 function getImperialData(currentCity) {
   event.preventDefault();
   let displayedCity = document.querySelector("#location");
-  let windUnits = document.querySelector("#wind-units");
   windUnits.innerHTML = `mph`;
   celsius.classList.remove("active");
   celsius.classList.add("inactive");
   fahrenheit.classList.add("active");
   fahrenheit.classList.remove("inactive");
   let apiCity = displayedCity.innerHTML;
-  let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${apiCity}&appid=${apiKey}&units=imperial`;
-  axios.get(apiUrl).then(displayData);
-  let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${apiCity}&appid=${apiKey}&units=imperial`;
+  let weatherApiUrl = `${apiUrl}weather?q=${apiCity}&appid=${apiKey}&units=imperial`;
+  axios.get(weatherApiUrl).then(displayData);
+  let apiForecastUrl = `${apiUrl}forecast?q=${apiCity}&appid=${apiKey}&units=imperial`;
   axios.get(apiForecastUrl).then(displayForecast);
 }
 
@@ -199,13 +176,26 @@ function getCityImage(city) {
     .catch(displayUndefinedImage);
 }
 
+let windUnits = document.querySelector("#wind-units");
+let apiKey = "1c79a9c19394dbdbf78cd6d4344cc928";
+let apiUrl = `https://api.openweathermap.org/data/2.5/`;
 let submit = document.querySelector("#search-form");
-submit.addEventListener("submit", inputSearch);
-
 let currentLocation = document.querySelector("#current-location");
-currentLocation.addEventListener("click", getCurrentLocation);
-
-celsius.addEventListener("click", convertToCelsius);
-fahrenheit.addEventListener("click", getImperialData);
+let celsius = document.querySelector("#celsius");
+let fahrenheit = document.querySelector("#fahrenheit");
+let currentTemperatureElement = document.querySelector(
+  "#current-temperature-element"
+);
+let currentLocalWeatherDes = document.querySelector("#weather-description");
+let currentLocalTempAmplitude = document.querySelector("#temp-max-min");
+let currentLocalWind = document.querySelector("#wind-speed");
+let currentLocalHumidity = document.querySelector("#humidity");
+let currentLocalPressure = document.querySelector("#pressure");
+let currentCity = document.querySelector("#location");
+let currentWeatherIcon = document.querySelector("#weather-icon");
 
 displayByDefault();
+submit.addEventListener("submit", inputSearch);
+currentLocation.addEventListener("click", getCurrentLocation);
+celsius.addEventListener("click", convertToCelsius);
+fahrenheit.addEventListener("click", getImperialData);
