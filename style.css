@@ -4,7 +4,7 @@ body {
 }
 
 div.container {
-  max-width: 500px;
+  max-width: 462px;
   max-height: 500px;
 }
 
@@ -79,15 +79,12 @@ ul.weatherDetails {
   bottom: 75px;
 }
 
-#submit-icon {
-  position: relative;
-  right: 20px;
-}
-
 #local-icon {
-  text-align: left;
+  text-align: right;
   font-size: x-large;
   color: #ec6e4c;
+  position: relative;
+  bottom: 4px;
 }
 
 #search-engine {
@@ -107,20 +104,23 @@ ul.weatherDetails {
 
 #current-location {
   border-radius: 50%;
-  position: relative;
-  bottom: 4px;
   border-color: rgb(250, 250, 250, 0);
   background: rgb(250, 250, 250, 0);
 }
 
 #units-links {
+  text-align: right;
+  font-size: x-large;
+}
+
+.btn-lg {
   font-size: x-large;
 }
 
 #github-link {
   text-align: center;
   position: relative;
-  right: 150px;
+  right: 135px;
   bottom: 18.5px;
   text-shadow: none;
 }
@@ -128,7 +128,7 @@ ul.weatherDetails {
 #pexels-link {
   text-align: center;
   position: relative;
-  left: 155px;
+  left: 140px;
   text-shadow: none;
 }
 

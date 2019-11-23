@@ -23,33 +23,36 @@
       <div class="card bg-dark text-white">
         <img src="#" class="card-img" id="background-image" />
         <div class="card-img-overlay">
-          <form class="mb-0" id="search-form">
-            <div class="row">
-            <div class="col-5">
+          <div class="row clearfix">
+            <div class="form-group">
+              <form class="form-inline" id="search-form">
                 <input
                   type="search"
                   placeholder="Enter city"
                   id="search-engine"
                   autocomplete="off"
+                  class="col-5 mr-2"
                 />
-              </div>
-            <div class="col-2">
-              <input type="submit" value="🔍" class="btn btn-sm" id="search-glass" />
+                <input
+                  type="submit"
+                  value="🔍"
+                  class="btn btn-sm"
+                  id="search-glass"
+                />
+                <div class="icon" id="local-icon">
+                  <button class="col-2 btn btn-sm mr-5" id="current-location">
+                    <i class="fas fa-map-marker-alt" id="local-icon"></i>
+                  </button>
+                </div>
+                <div class="units" id="units-links">
+                  <a href="#" id="celsius" class="btn btn-lg active">C</a>
+                  |<a href="#" id="fahrenheit" class="btn btn-lg inactive"
+                    >F
+                  </a>
+                </div>
               </form>
             </div>
-
-            <div class="col-2" class="icon" id="submit-icon">
-              <button id="current-location">
-                <i class="fas fa-map-marker-alt" id="local-icon"></i>
-              </button>
-            </div>
-            <div class="col-3 units" id="units-links">
-              <a href="#" id="celsius" class="active">C </a>
-              |
-              <a href="#" id="fahrenheit" class="inactive">F </a>
-            </div>
           </div>
-          <br />
           <div class="row">
             <div class="col-6" class="leftData">
               <h4 class="leftData" id="location"></h4>
